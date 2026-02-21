@@ -1,0 +1,109 @@
+body {
+    background-color: #050505;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif; /* Daha fütüristik bir font için index'e ekleyebilirsin */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#welcome-screen {
+    position: absolute;
+    transition: opacity 1s ease;
+}
+
+.welcome-text {
+    font-size: 2.5rem;
+    color: #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.9); }
+    100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+}
+
+.hidden { opacity: 0; visibility: hidden; }
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 2s ease;
+}
+
+.circle-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border: 4px solid #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 25px #FFD700, inset 0 0 15px #FFD700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.liquid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #004e92, #00d2ff);
+    bottom: -100%; /* Başlangıçta boş */
+    transition: bottom 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    z-index: 1;
+}
+
+.logo-text {
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.input-area {
+    display: flex;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 5px;
+    border-radius: 30px;
+    border: 1px solid #FFD700;
+}
+
+#user-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    width: 300px;
+    outline: none;
+}
+
+#send-btn {
+    background: #FFD700;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#send-btn:hover { transform: scale(1.05); }
+
+#response-box {
+    margin-top: 25px;
+    max-width: 80%;
+    color: #00d2ff;
+    text-align: center;
+    line-height: 1.6;
+}
