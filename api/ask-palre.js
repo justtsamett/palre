@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).end();
 
-    const { messages } = req.body; // Artık sadece tek bir prompt değil, dizi alıyoruz
+    const { messages } = req.body;
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
     try {
@@ -15,9 +15,9 @@ export default async function handler(req, res) {
                 messages: [
                     { 
                         role: "system", 
-                        content: "Senin adın P.A.L.R.E. Samet'in asil yardımcısısın. Konuşma geçmişine ve kullanıcının kişisel bilgilerine hakimsin. Eğer kullanıcı kendisi hakkında kalıcı bir bilgi verirse bunu hatırla." 
+                        content: "Senin adın P.A.L.R.E. Samet'in asil yardımcısısın. Konuşma geçmişine hakimsin. Eğer kullanıcı önemli bir bilgi verirse (isim, tercih, proje vb.) ve bunu hatırlamanı isterse, cevabının en sonuna [SAVE:hatırlanacak_bilgi] formatında bir ekleme yap. Bu ekleme kullanıcıya görünmeyecek ama sistemin onu kaydetmesini sağlayacak." 
                     },
-                    ...messages // Geçmiş mesajlar buraya ekleniyor
+                    ...messages
                 ],
                 model: "gpt-4o",
                 temperature: 0.7
