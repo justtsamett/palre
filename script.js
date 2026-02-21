@@ -1,64 +1,64 @@
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const welcome = document.getElementById('welcome-screen');
-        welcome.style.opacity = '0';
-        setTimeout(() => {
-            welcome.style.display = 'none';
-            document.getElementById('main-container').classList.remove('hidden');
-            setTimeout(() => {
-                document.querySelector('.liquid').style.bottom = '-10%'; 
-            }, 500);
-        }, 1500);
-    }, 3500);
-});
+// Hafıza Yönetim Objesi
+const Memory = {
+    // Kısa süreli hafızayı getir (Son 10 mesaj)
+    getShortTerm() {
+        const history = sessionStorage.getItem('palre_chat_history');
+        return history ? JSON.parse(history) : [];
+    },
+
+    // Uzun süreli kişisel verileri getir
+    getLongTerm() {
+        return localStorage.getItem('palre_user_profile') || "Henüz kişisel bilgi yok.";
+    },
+
+    // Yeni mesajı hafızaya ekle
+    save(role, content) {
+        let history = this.getShortTerm();
+        history.push({ role, content });
+        
+        // Sadece son 10 mesajı tut (5 Kullanıcı + 5 Asistan gibi)
+        if (history.length > 10) history.shift();
+        
+        sessionStorage.setItem('palre_chat_history', JSON.stringify(history));
+    }
+};
 
 async function askPALRE() {
     const input = document.getElementById('user-input');
     const box = document.getElementById('response-box');
-    const text = input.value.trim();
+    const userText = input.value.trim();
 
-    if (!text) return;
-
+    if (!userText) return;
     input.value = "";
-    box.innerText = "Sinyal iletiliyor...";
+    box.innerText = "İşleniyor...";
+
+    // 1. Kullanıcı mesajını hafızaya kaydet
+    Memory.save("user", userText);
+
+    // 2. Hafızayı hazırla (Long Term + Short Term)
+    const longTermContext = `Kullanıcı Bilgileri: ${Memory.getLongTerm()}`;
+    const fullMessages = [
+        { role: "system", content: longTermContext },
+        ...Memory.getShortTerm()
+    ];
 
     try {
         const response = await fetch("/api/ask-palre", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: text })
+            body: JSON.stringify({ messages: fullMessages })
         });
 
         const data = await response.json();
-        console.log("Gelen Veri:", data); // Sorun varsa burada görünecek
+        const aiText = data.choices[0].message.content;
 
-        if (data.choices && data.choices[0]) {
-            typeWriter(data.choices[0].message.content, "response-box");
-        } else {
-            // Hata mesajını ekrana yazdır ki ne olduğunu anlayalım
-            box.innerText = "Hata: " + (data.error?.message || data.error || "Bilinmeyen bir hata oluştu.");
-        }
+        // 3. AI cevabını hafızaya kaydet
+        Memory.save("assistant", aiText);
+        
+        // Ekrana yazdır
+        typeWriter(aiText, "response-box");
+
     } catch (err) {
-        box.innerText = "Bağlantı Hatası: Sunucuya ulaşılamıyor.";
-        console.error("Fetch Hatası:", err);
+        box.innerText = "Hafıza erişim hatası.";
     }
 }
-
-function typeWriter(text, elementId) {
-    const element = document.getElementById(elementId);
-    element.innerHTML = "";
-    let i = 0;
-    const interval = setInterval(() => {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(interval);
-        }
-    }, 25);
-}
-
-document.getElementById('send-btn').addEventListener('click', askPALRE);
-document.getElementById('user-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') askPALRE();
-});
