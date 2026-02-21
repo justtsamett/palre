@@ -1,14 +1,14 @@
-:root { --gold: #FFD700; --blue: #00d2ff; --dark: #0a0a0a; }
+:root { --gold: #FFD700; --blue: #00d2ff; --dark: #050505; }
 body { background: var(--dark); color: #fff; font-family: 'Rajdhani', sans-serif; margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-#welcome-screen { position: absolute; z-index: 100; transition: opacity 1s; }
+#welcome-screen { position: absolute; z-index: 100; transition: opacity 1.5s; }
 .welcome-text { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--gold); text-shadow: 0 0 20px var(--gold); }
 .hidden { opacity: 0; visibility: hidden; }
-#main-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
-.circle-wrapper { position: relative; width: 250px; height: 250px; border: 3px solid var(--gold); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); margin-bottom: 40px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-.liquid { position: absolute; width: 150%; height: 150%; background: linear-gradient(45deg, #004e92, var(--blue)); bottom: -150%; border-radius: 40%; transition: bottom 5s ease; animation: rotate 10s linear infinite; }
+#main-container { display: flex; flex-direction: column; align-items: center; width: 100%; transition: opacity 2s; }
+.circle-wrapper { position: relative; width: 240px; height: 240px; border: 3px solid var(--gold); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); margin-bottom: 30px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.liquid { position: absolute; width: 200%; height: 200%; background: linear-gradient(45deg, #004e92, var(--blue)); bottom: -200%; border-radius: 40%; transition: bottom 5s ease; animation: rotate 10s linear infinite; }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.logo-text { position: relative; z-index: 5; font-family: 'Orbitron', sans-serif; font-size: 1.8rem; letter-spacing: 4px; color: #fff; }
-.input-area { display: flex; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px; border: 1px solid var(--gold); }
-#user-input { background: transparent; border: none; color: #fff; width: 250px; outline: none; }
-#send-btn { background: var(--gold); border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; }
-#response-box { margin-top: 25px; padding: 10px; max-width: 80%; text-align: center; color: var(--blue); font-size: 1.1rem; }
+.logo-text { position: relative; z-index: 5; font-family: 'Orbitron', sans-serif; font-size: 1.6rem; letter-spacing: 3px; color: #fff; }
+.input-area { display: flex; background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 40px; border: 1px solid var(--gold); }
+#user-input { background: transparent; border: none; color: #fff; width: 280px; outline: none; padding: 10px; font-size: 1rem; }
+#send-btn { background: var(--gold); border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; font-family: 'Orbitron'; }
+#response-box { margin-top: 25px; padding: 15px; max-width: 80%; text-align: center; color: var(--blue); font-size: 1.1rem; min-height: 80px; border-top: 1px solid rgba(0,210,255,0.2); }
