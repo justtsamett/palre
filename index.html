@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palre AI</title>
+    <title>P.A.L.R.E | Neural Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-container">
-        <div class="palre-container">
-            <div class="palre-circle">
-                <img src="https://i.ibb.co/X7fLq4Y/palre-logo.png" alt="Palre Logo" class="palre-logo">
-            </div>
-            <p class="status-text">Palre dinliyor...</p>
-        </div>
+    <div id="welcome-screen"><h1 class="welcome-text">Hoşgeldiniz Efendim</h1></div>
+    <div id="main-container" class="hidden">
+        <div class="circle-wrapper"><div class="liquid"></div><div class="logo-text">P.A.L.R.E</div></div>
+        <div class="input-area"><input type="text" id="user-input" placeholder="Sisteme veri girin..."><button id="send-btn">GÖNDER</button></div>
+        <div id="response-box"></div>
     </div>
     <script src="script.js"></script>
 </body>
