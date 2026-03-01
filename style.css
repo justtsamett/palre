@@ -4,7 +4,7 @@ body { background: var(--dark); color: #fff; font-family: 'Rajdhani', sans-serif
 .welcome-text { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--gold); text-shadow: 0 0 20px var(--gold); }
 .hidden { opacity: 0; visibility: hidden; }
 #main-container { display: flex; flex-direction: column; align-items: center; width: 100%; transition: opacity 2s; }
-.circle-wrapper { position: relative; width: 240px; height: 240px; border: 3px solid var(--gold); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); margin-bottom: 30px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+.circle-wrapper { position: relative; width: 240px; height: 240px; border: 3px solid var(--gold); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); margin-bottom: 30px; overflow: hidden; display: flex; justify-content: center; align-items: center; transition: box-shadow 0.5s ease; }
 .liquid { position: absolute; width: 200%; height: 200%; background: linear-gradient(45deg, #004e92, var(--blue)); bottom: -200%; border-radius: 40%; transition: bottom 5s ease; animation: rotate 10s linear infinite; }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .logo-text { position: relative; z-index: 5; font-family: 'Orbitron', sans-serif; font-size: 1.6rem; letter-spacing: 3px; color: #fff; }
@@ -12,3 +12,5 @@ body { background: var(--dark); color: #fff; font-family: 'Rajdhani', sans-serif
 #user-input { background: transparent; border: none; color: #fff; width: 280px; outline: none; padding: 10px; font-size: 1rem; }
 #send-btn { background: var(--gold); border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; font-family: 'Orbitron'; }
 #response-box { margin-top: 25px; padding: 15px; max-width: 80%; text-align: center; color: var(--blue); font-size: 1.1rem; min-height: 80px; border-top: 1px solid rgba(0,210,255,0.2); }
+/* Dinleme Efekti */
+.listening { box-shadow: 0 0 50px var(--blue) !important; border-color: var(--blue) !important; }
